@@ -9,7 +9,7 @@ jobs:
   create_file:
     runs-on: ubuntu-latest
     container:
-      image: alpine
+      image: Dockerfile
     timeout-minutes: 60
     steps:
     - uses: actions/checkout@v4.1.0
@@ -28,7 +28,7 @@ jobs:
     needs: create_file
     runs-on: ubuntu-latest
     container:
-      image: alpine
+      image: Dockerfile
     timeout-minutes: 60
     steps:
     - uses: actions/checkout@v4.1.0
