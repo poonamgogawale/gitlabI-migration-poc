@@ -1,0 +1,39 @@
+name: GitHub-Action-Importer/GH-Action-Importer
+on:
+  push:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+jobs:
+  create_file:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://./Dockerfile
+    timeout-minutes: 60
+    steps:
+    - uses: actions/checkout@v4.1.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - run: echo "Building demo pipeline"
+    - run: mkdir build
+    - run: touch build/sample.txt
+    - uses: actions/upload-artifact@v4.1.0
+      if: success()
+      with:
+        name: "${{ github.job }}"
+        path: build/
+  test_file:
+    needs: create_file
+    runs-on: ubuntu-latest
+    container:
+      image: docker://./Dockerfile
+    timeout-minutes: 60
+    steps:
+    - uses: actions/checkout@v4.1.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - uses: actions/download-artifact@v4.1.0
+    - run: test -f build/sample.txt
