@@ -9,9 +9,11 @@ jobs:
   create_file:
     runs-on: ubuntu-latest
     container:
-      image: docker://./Dockerfile
+      image: alpine
     timeout-minutes: 60
     steps:
+    - name: Install Git in Alpine container # <-- NEW STEP
+      run: apk update && apk add git
     - uses: actions/checkout@v4.1.0
       with:
         fetch-depth: 20
@@ -28,9 +30,11 @@ jobs:
     needs: create_file
     runs-on: ubuntu-latest
     container:
-      image: docker://./Dockerfile
+     image: alpine
     timeout-minutes: 60
     steps:
+    - name: Install Git in Alpine container # <-- NEW STEP
+      run: apk update && apk add git
     - uses: actions/checkout@v4.1.0
       with:
         fetch-depth: 20
