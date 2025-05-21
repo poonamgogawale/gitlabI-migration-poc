@@ -8,12 +8,12 @@ concurrency:
 jobs:
   create_file:
     runs-on: ubuntu-latest
-    container:
-      image: alpine
+    # container:
+    #   image: alpine
     timeout-minutes: 60
     steps:
-    - name: Install Git and Git LFS in Alpine container # <-- NEW STEP
-      run: apk update && apk add git git-lfs
+    # - name: Install Git and Git LFS in Alpine container # <-- NEW STEP
+    #   run: apk update && apk add git git-lfs
     - uses: actions/checkout@v4.1.0
       with:
         fetch-depth: 20
@@ -29,19 +29,19 @@ jobs:
   test_file:
     needs: create_file
     runs-on: ubuntu-latest
-    container:
-     image: alpine
+    # container:
+    #  image: alpine
     timeout-minutes: 60
     steps:
-    - name: Install Git and Git LFS in Alpine container # <-- NEW STEP
-      run: apk update && apk add git git-lfs
+    # - name: Install Git and Git LFS in Alpine container # <-- NEW STEP
+    #   run: apk update && apk add git git-lfs
     - uses: actions/checkout@v4.1.0
       with:
         fetch-depth: 20
         lfs: true
-    - name: Download build artifacts # <-- NEW STEP NAME
-      uses: actions/download-artifact@v4.1.0
-      with:
-        name: create_file # <--- Specify the name of the artifact to download
-        path: .           # <--- Download it to the current working directory (flattens it)
-    - run: test -f sample.txt
+    # - name: Download build artifacts # <-- NEW STEP NAME
+    - uses: actions/download-artifact@v4.1.0
+      # with:
+      #   name: create_file # <---  NEW STEP 
+      #   path: .           
+    - run: test -f build/sample.txt
