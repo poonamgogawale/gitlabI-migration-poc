@@ -12,8 +12,6 @@ jobs:
     #   image: alpine
     timeout-minutes: 60
     steps:
-    # - name: Install Git and Git LFS in Alpine container # <-- NEW STEP
-    #   run: apk update && apk add git git-lfs
     - uses: actions/checkout@v4.1.0
       with:
         fetch-depth: 20
@@ -33,13 +31,10 @@ jobs:
     #  image: alpine
     timeout-minutes: 60
     steps:
-    # - name: Install Git and Git LFS in Alpine container # <-- NEW STEP
-    #   run: apk update && apk add git git-lfs
     - uses: actions/checkout@v4.1.0
       with:
         fetch-depth: 20
         lfs: true
-    # - name: Download build artifacts # <-- NEW STEP NAME
     - uses: actions/download-artifact@v4.1.0
       with:
         name: create_file # <---  NEW STEP 
