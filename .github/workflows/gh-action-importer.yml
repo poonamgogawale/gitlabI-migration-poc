@@ -44,8 +44,4 @@ jobs:
       with:
         name: create_file # <--- Specify the name of the artifact to download
         path: .           # <--- Download it to the current working directory (flattens it)
-    - name: Debug:List files after artifact download
-      run: |
-        ls -lR .
-        pwd
     - run: test -f sample.txt
