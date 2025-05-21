@@ -48,4 +48,4 @@ jobs:
       run: |
         ls -lR .
         pwd
-    - run: test -f build/sample.txt
+    - run: test -f sample.txt
