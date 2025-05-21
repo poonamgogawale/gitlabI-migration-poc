@@ -44,4 +44,4 @@ jobs:
       # with:
       #   name: create_file # <---  NEW STEP 
       #   path: .           
-    - run: test -f build/sample.txt
+    - run: test -f sample.txt
